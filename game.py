@@ -9,3 +9,6 @@ class Game:
             self.board.append([])
             for j in range(boardSize):
                 self.board[i].append(0)
+
+    def makeMove(self, x, y):
+        self.board[x][y] = self.activePlayer
