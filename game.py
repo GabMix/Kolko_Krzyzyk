@@ -11,4 +11,7 @@ class Game:
                 self.board[i].append(0)
 
     def makeMove(self, x, y):
+        if x >= self.boardSize or y >= self.boardSize:
+            return
+
         self.board[x][y] = self.activePlayer
