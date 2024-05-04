@@ -2,6 +2,8 @@ class Game:
     def __init__(self, boardSize):
         self.board = []
         self.boardSize = boardSize
+        self.activePlayer = 1
+        self.isFinished = False
 
         for i in range(boardSize):
             self.board.append([])
