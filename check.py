@@ -8,7 +8,7 @@ def sym():
     else:
         symbol2 = "X"
         print("Player 1 : O ")
-        print("Player 2: X. ")
+        print("Player 2: X ")
     print("\n")
     return symbol1, symbol2
 
