@@ -13,19 +13,19 @@ class Game:
     def makeMove(self, x, y):
         if x >= self.boardSize or y >= self.boardSize:
             return
-        
+
         if self.board[x][y] != 0:
             return
 
         if self.state != 0:
             return
 
-        self.board[x][y] = self.activePlayer
+        self.board[y][x] = self.activePlayer
 
         self.checkIfGameOver()
         #TODO: zmienić gracza
 
-    #TODO: sprawidzić czy jest remis, opowiednio zmienić stan gry (self.state), należy sprawdzić kolumny, wiersze i proste, uwzględnić rozmiary planszy
+    #TODO: sprawidzić czy jest remis, opowiednio zmienić stan gry (self.state), należy sprawdzić kolumny, wiersze i przekątne, uwzględnić rozmiary planszy
     #TODO: sprawdzić czy któryś gracz wygrał, zmienić stan gry
     def checkIfGameOver(self):
         print("")
