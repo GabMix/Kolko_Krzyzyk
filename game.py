@@ -14,7 +14,7 @@ class Game:
         if x >= self.boardSize or y >= self.boardSize:
             return
 
-        if self.board[x][y] != 0:
+        if self.board[y][x] != 0:
             return
 
         if self.state != 0:
