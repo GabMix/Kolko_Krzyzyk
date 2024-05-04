@@ -1,3 +1,3 @@
 from game import *
 
-game = Game()
+game = Game(3)
