@@ -23,7 +23,7 @@ class Game:
         self.board[y][x] = self.activePlayer
 
         self.checkIfGameOver()
-        if(self.state == 0):
+        if self.state == 0:
             self.switchPlayer()
         else:
             self.endGame()
@@ -32,56 +32,55 @@ class Game:
     #TODO: sprawidzić czy jest remis, opowiednio zmienić stan gry (self.state), należy sprawdzić kolumny, wiersze i przekątne, uwzględnić rozmiary planszy
     #TODO: sprawdzić czy któryś gracz wygrał, zmienić stan gry
     def checkWin(self):
-        #rzedy,
-        for y in range self.boardSize:
-            for i in range self.boardSize:
-                if(self.board[i][y] != self.activePlayer):
+        #rzędy,
+        global i
+        for y in range(self.boardSize):
+            for i in range(self.boardSize):
+                if self.board[i][y] != self.activePlayer:
                     break
-                else if(i == self.boardSize - 1):
+                elif i == (self.boardSize - 1):
                     self.state = self.activePlayer
         #kolumny
-        for x in range self.boardSize:
-            for i in range self.boardSize:
-                if(self.board[x][i] != self.activePlayer):
+        for x in range(self.boardSize):
+            for i in range(self.boardSize):
+                if self.board[x][i] != self.activePlayer:
                     break
-                else if(i == self.boardSize - 1):
+                elif i == (self.boardSize - 1):
                     self.state = self.activePlayer
         #przekatne_1
-        for i in range self.boardSize:
-            if(self.board[i][i] != self.activePlayer):
+        for i in range(self.boardSize):
+            if self.board[i][i] != self.activePlayer:
                 break
-            else if(i == self.boardSize - 1):
+            elif i == (self.boardSize - 1):
                 self.state = self.activePlayer
         #przekatne_2
-        for i in range self.boardSize:
-            if(self.board[i][(self.boardSize - 1)-i] != self.activePlayer):
+        for i in range(self.boardSize):
+            if self.board[i][(self.boardSize - 1) - i] != self.activePlayer:
                 break
-            else if(i == self.boardSize - 1)
+            elif i == (self.boardSize - 1):
                 self.state = self.activePlayer
-            
+
     def checkTie(self):
-      if(0 not in self.board) :
-        self.state = -1
+        if 0 not in self.board:
+            self.state = -1
     def checkIfGameOver(self):
         self.checkTie()
         self.checkWin()
-        if(self.state != 0):
+        if self.state != 0:
             print("Gra zakonczona")
     def switchPlayer(self):
-      if(self.activePlayer == 1):
-        self.activePlayer = 2 
-      else:
-        self.activePlayer = 1
+        if self.activePlayer == 1:
+            self.activePlayer = 2
+        else:
+            self.activePlayer = 1
     def endGame(self):
         match self.state:
-            case: -1
+            case -1:
                 print("Gra konczy sie remisem, pocwicz :)")
-            case: 1
+            case 1:
                 print("Gra konczy sie wygrana X, gratulacje!")
-            case: 2
-                print("gra konczy sie wygrana O, gratulacje!)
-
-   
-
-    
+            case 2:
+                print("Gra konczy sie wygrana O, gratulacje!")
+            case _:
+                print("Blad!\n")
 
