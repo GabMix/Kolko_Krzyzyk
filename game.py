@@ -25,6 +25,8 @@ class Game:
         self.checkIfGameOver()
         if(self.state == 0):
             self.switchPlayer()
+        else:
+            self.endGame()
         #TODO: zmienić gracza
 
     #TODO: sprawidzić czy jest remis, opowiednio zmienić stan gry (self.state), należy sprawdzić kolumny, wiersze i przekątne, uwzględnić rozmiary planszy
@@ -70,6 +72,14 @@ class Game:
         self.activePlayer = 2 
       else:
         self.activePlayer = 1
+    def endGame(self):
+        match self.state:
+            case: -1
+                print("Gra konczy sie remisem, pocwicz :)")
+            case: 1
+                print("Gra konczy sie wygrana X, gratulacje!")
+            case: 2
+                print("gra konczy sie wygrana O, gratulacje!)
 
    
 
