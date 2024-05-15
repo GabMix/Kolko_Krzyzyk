@@ -74,13 +74,10 @@ class Game:
         else:
             self.activePlayer = 1
     def endGame(self):
-        match self.state:
-            case -1:
-                print("Gra konczy sie remisem, pocwicz :)")
-            case 1:
-                print("Gra konczy sie wygrana X, gratulacje!")
-            case 2:
-                print("Gra konczy sie wygrana O, gratulacje!")
-            case _:
-                print("Blad!\n")
+        if self.state == -1:
+            print("Gra konczy sie remisem, pocwicz :)")
+        elif self.state == 1:
+            print("Gra konczy sie wygrana X, gratulacje!")
+        elif self.state == 2:
+            print("Gra konczy sie wygrana O, gratulacje!")
 
