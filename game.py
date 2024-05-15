@@ -32,14 +32,14 @@ class Game:
     #TODO: sprawidzić czy jest remis, opowiednio zmienić stan gry (self.state), należy sprawdzić kolumny, wiersze i przekątne, uwzględnić rozmiary planszy
     #TODO: sprawdzić czy któryś gracz wygrał, zmienić stan gry
     def checkWin(self):
-        #kolumny,
+        #rzedy,
         for y in range self.boardSize:
-            fori in range self.boardSize:
+            for i in range self.boardSize:
                 if(self.board[i][y] != self.activePlayer):
                     break
                 else if(i == self.boardSize - 1):
                     self.state = self.activePlayer
-        #rzędy
+        #kolumny
         for x in range self.boardSize:
             for i in range self.boardSize:
                 if(self.board[x][i] != self.activePlayer):
@@ -63,8 +63,8 @@ class Game:
       if(0 not in self.board) :
         self.state = -1
     def checkIfGameOver(self):
-        self.checkTie
-        self.checkWin
+        self.checkTie()
+        self.checkWin()
         if(self.state != 0):
             print("Gra zakonczona")
     def switchPlayer(self):
