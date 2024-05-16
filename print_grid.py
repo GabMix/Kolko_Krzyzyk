@@ -31,7 +31,7 @@ for i in range(1, squares_x):
 for j in range(1, squares_y):
     y = j * square_size
     canvas.create_line(0, y, image_width, y, fill="black")
-# Dodanie obsługi zdarzeń kliknięcia
+# Dodanie obslugi zdarzeń kliknięcia
 canvas.bind("<Button-1>", on_click)
 
 root.mainloop()
