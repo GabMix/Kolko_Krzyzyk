@@ -1,3 +1,3 @@
-from game import *
+from Main_Menu import *
 
-game = Game(3)
+MainMenu()
