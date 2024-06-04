@@ -18,8 +18,8 @@ class GameBoard:
         # Przypisywanie przyciskow do siatki
         for x in range(boardsize):
             for y in range(boardsize):
-                self.btn[x][y].grid(row=y, column=x, sticky="news") # news = north east west south
-                self.btn[x][y].config(command=lambda x1=x,y1=y: self.clickTile(x1, y1))
+                self.btn[y][x].grid(row=y, column=x, sticky="news") # news = north east west south
+                self.btn[y][x].config(command=lambda x1=x,y1=y: self.clickTile(x1, y1))
 
         self.refresh()
         self.root.mainloop()
@@ -27,12 +27,12 @@ class GameBoard:
     def refresh(self):
         for x in range(self.game.boardSize):
             for y in range(self.game.boardSize):
-                if self.game.board[x][y] == 1:
-                    self.btn[x][y].config(text="X")
-                elif self.game.board[x][y] == 2:
-                    self.btn[x][y].config(text="O")
+                if self.game.board[y][x] == 1:
+                    self.btn[y][x].config(text="X")
+                elif self.game.board[y][x] == 2:
+                    self.btn[y][x].config(text="O")
                 else:
-                    self.btn[x][y].config(text="")
+                    self.btn[y][x].config(text="")
 
     def clickTile(self, x, y):
         self.game.makeMove(x, y)
