@@ -27,10 +27,7 @@ class Game:
             self.switchPlayer()
         else:
             self.endGame()
-        #TODO: zmienić gracza
 
-    #TODO: sprawidzić czy jest remis, opowiednio zmienić stan gry (self.state), należy sprawdzić kolumny, wiersze i przekątne, uwzględnić rozmiary planszy
-    #TODO: sprawdzić czy któryś gracz wygrał, zmienić stan gry
     def checkWin(self):
         #rzędy
         for y in range(self.boardSize):
