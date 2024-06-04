@@ -1,0 +1,11 @@
+Tło:
+Poziomo: 1024
+Pionowo: 1024
+
+Ramka:
+Poziomo: 700
+Pionowo: 754(zew) 594(wew)
+
+Przyciski:
+Poziomo: 400 / 398
+Pionowo: 116 / 115
