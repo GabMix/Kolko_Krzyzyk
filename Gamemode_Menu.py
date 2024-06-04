@@ -29,12 +29,12 @@ class Choose:
 
     def run_3x3(self):
         self.root.destroy()
-        Game(3)
+        GameBoard(3)
 
     def run_4x4(self):
         self.root.destroy()
-        Game(4)
+        GameBoard(4)
 
     def run_5x5(self):
         self.root.destroy()
-        Game(5)
+        GameBoard(5)

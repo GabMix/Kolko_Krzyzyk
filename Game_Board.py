@@ -1,6 +1,7 @@
 import tkinter as tk
+from game import *
 
-class Game:
+class GameBoard:
     def __init__(self, boardsize):
         self.root = tk.Tk()
         self.root.geometry("1024x1024")
