@@ -19,6 +19,7 @@ class GameBoard:
         for x in range(boardsize):
             for y in range(boardsize):
                 self.btn[x][y].grid(row=y, column=x, sticky="news") # news = north east west south
+                self.btn[x][y].config(command=lambda x1=x,y1=y: self.clickTile(x1, y1))
 
         self.refresh()
         self.root.mainloop()
@@ -32,3 +33,7 @@ class GameBoard:
                     self.btn[x][y].config(text="O")
                 else:
                     self.btn[x][y].config(text="")
+
+    def clickTile(self, x, y):
+        self.game.makeMove(x, y)
+        self.refresh()
