@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from game import *
 
 class GameBoard:
@@ -34,6 +35,18 @@ class GameBoard:
                 else:
                     self.btn[y][x].config(text="")
 
+        if self.game.state != 0:
+            self.endingAction()
+
     def clickTile(self, x, y):
         self.game.makeMove(x, y)
         self.refresh()
+
+    def endingAction(self):
+        if self.game.state == 1:
+            messagebox.showinfo("Game Over", "Winner is X!")
+        elif self.game.state == 2:
+            messagebox.showinfo("Game Over", "Winner is O!")
+        else:
+            messagebox.showinfo("Game Over", "Tie")
+        self.root.destroy()
