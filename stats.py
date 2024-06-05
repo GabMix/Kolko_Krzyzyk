@@ -1,23 +1,23 @@
 import json
 import os
 
-#sprawdza czy gracz wygral
-def check_if_winner(self):
-    #rzedy
-    for row in range(self.boardsize):
-        if all(self.board[row][col]== self.player for col in range(self.boardsize)):
-            return True
-    #kolumny
-    for col in range(self.boardsize):
-        if all(self.board[row][col]==self.player for row in range(self.boardsize)):
-            return True
-    #przekatna1 lg do pd
-    if all(self.board[i][i] ==self.player for i in range(self.boardsize)):
-        return True
-    #przekątna2 pg ld
-    if all(self.board[i][self.boardsize- 1-i] == self.player for i in range(self.boardsize)):
-        return True
-    return False
+# #sprawdza czy gracz wygral
+# def check_if_winner(self):
+#     #rzedy
+#     for row in range(self.boardsize):
+#         if all(self.board[row][col]== self.player for col in range(self.boardsize)):
+#             return True
+#     #kolumny
+#     for col in range(self.boardsize):
+#         if all(self.board[row][col]==self.player for row in range(self.boardsize)):
+#             return True
+#     #przekatna1 lg do pd
+#     if all(self.board[i][i] ==self.player for i in range(self.boardsize)):
+#         return True
+#     #przekątna2 pg ld
+#     if all(self.board[i][self.boardsize- 1-i] == self.player for i in range(self.boardsize)):
+#         return True
+#     return False
 
 
 #updatujemy stats wygranych remisow i przegranych
