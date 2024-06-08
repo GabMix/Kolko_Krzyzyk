@@ -26,15 +26,8 @@ class GameBoard:
                 self.btn[y][x].config(command=lambda x1=x,y1=y: self.clickTile(x1, y1))
 
         # Odpowiedni rozmiar znaków
-        if boardsize == 3:
-            self.X_image = tk.PhotoImage(file="X_3.png")
-            self.O_image = tk.PhotoImage(file="O_3.png")
-        elif boardsize == 4:
-            self.X_image = tk.PhotoImage(file="X_4.png")
-            self.O_image = tk.PhotoImage(file="O_4.png")
-        elif boardsize == 5:
-            self.X_image = tk.PhotoImage(file="X_5.png")
-            self.O_image = tk.PhotoImage(file="O_5.png")
+        self.X_image = tk.PhotoImage(file="X_"+str(boardsize)+".png")
+        self.O_image = tk.PhotoImage(file="O_"+str(boardsize)+".png")
 
         self.refresh()
         self.root.mainloop()
