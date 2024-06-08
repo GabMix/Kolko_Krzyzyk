@@ -60,3 +60,5 @@ class GameBoard:
         else:
             messagebox.showinfo("Game Over", "Tie")
         self.root.destroy()
+        from Main_Menu import MainMenu
+        MainMenu()
