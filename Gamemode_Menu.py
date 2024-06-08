@@ -5,25 +5,25 @@ class Choose:
         self.root = tk.Tk()
         self.root.geometry("768x768")
         self.root.title("Wybór trybu gry")
+        self.root.resizable(False, False)
 
-        # Tymczasowy design ------------------------------------
-        boardsize = 3
-        # Tworzenie siatki
-        for i in range(boardsize):
-            self.root.rowconfigure(i, weight=1)
-            self.root.columnconfigure(i, weight=1)
+        # Tło
+        self.background_image = tk.PhotoImage(file="Gamemode_Background.png")
+        self.background = tk.Label(self.root, image=self.background_image)
+        self.background.place(x=0, y=0, relwidth=1, relheight=1)
 
-        # Tworzenie przyciskow
-        self.btn = [[tk.Button(self.root, text="Tymczasowy design") for i in range(boardsize)] for j in range(boardsize)]
-        # Przypisywanie przyciskow do siatki
-        for x in range(boardsize):
-            for y in range(boardsize):
-                self.btn[x][y].grid(row=y, column=x, sticky="news")  # news = north east west south
-        self.btn[0][0].configure(text="3x3", command=self.run_3x3)
-        self.btn[1][0].configure(text="4x4", command=self.run_4x4)
-        self.btn[2][0].configure(text="5x5", command=self.run_5x5)
+        # Wybór rozmiaru
+        self.image_3x3 = tk.PhotoImage(file="3x3_btn.png")
+        self.btn_3x3 = tk.Button(self.root, image=self.image_3x3 , borderwidth=0, command=self.run_3x3)
+        self.btn_3x3.place(x=350, y=300, width=100, height=100)
 
-        # koniec tymczasowego designu ------------------------------
+        self.image_4x4 = tk.PhotoImage(file="4x4_btn.png")
+        self.btn_4x4 = tk.Button(self.root, image=self.image_4x4, borderwidth=0, command=self.run_4x4)
+        self.btn_4x4.place(x=450, y=300, width=100, height=100)
+
+        self.image_5x5 = tk.PhotoImage(file="5x5_btn.png")
+        self.btn_5x5 = tk.Button(self.root, image=self.image_5x5, borderwidth=0, command=self.run_5x5)
+        self.btn_5x5.place(x=550, y=300, width=100, height=100)
 
         self.root.mainloop()
 

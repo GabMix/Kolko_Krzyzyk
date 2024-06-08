@@ -5,22 +5,36 @@ from game import *
 class GameBoard:
     def __init__(self, boardsize):
         self.root = tk.Tk()
-        self.root.geometry("1024x1024")
+        self.root.geometry("768x768")
         self.root.title( "Gra " + str(boardsize) + "x" + str(boardsize) )
+        self.root.resizable(False, False)
         self.game = Game(boardsize)
 
-        # Tworzenie siatki
-        for i in range(boardsize):
-            self.root.rowconfigure(i, weight=1)
-            self.root.columnconfigure(i, weight=1)
+        # Tlo
+        self.background_image = tk.PhotoImage(file="3x3-gotowe.png")
+        self.background = tk.Label(self.root, image=self.background_image)
+        self.background.place(x=0, y=0, relwidth=1, relheight=1)
 
         # Tworzenie przyciskow
-        self.btn = [[tk.Button(self.root, text=str(i)+str(j)) for i in range(boardsize)] for j in range(boardsize)]
+        self.off_image = tk.PhotoImage(file="Empty_temp.png")
+        self.btn = [[tk.Button(self.root, image=self.off_image, borderwidth=0, activebackground='black')
+                     for i in range(boardsize)] for j in range(boardsize)]
         # Przypisywanie przyciskow do siatki
         for x in range(boardsize):
             for y in range(boardsize):
-                self.btn[y][x].grid(row=y, column=x, sticky="news") # news = north east west south
+                self.btn[x][y].place(x=223 + (330/boardsize)*x, y=300 + (330/boardsize)*y, width=300/boardsize, height=300/boardsize)
                 self.btn[y][x].config(command=lambda x1=x,y1=y: self.clickTile(x1, y1))
+
+        # Odpowiedni rozmiar znaków
+        if boardsize == 3:
+            self.X_image = tk.PhotoImage(file="X_3.png")
+            self.O_image = tk.PhotoImage(file="O_3.png")
+        elif boardsize == 4:
+            self.X_image = tk.PhotoImage(file="X_4.png")
+            self.O_image = tk.PhotoImage(file="O_4.png")
+        elif boardsize == 5:
+            self.X_image = tk.PhotoImage(file="X_5.png")
+            self.O_image = tk.PhotoImage(file="O_5.png")
 
         self.refresh()
         self.root.mainloop()
@@ -29,11 +43,11 @@ class GameBoard:
         for x in range(self.game.boardSize):
             for y in range(self.game.boardSize):
                 if self.game.board[y][x] == 1:
-                    self.btn[y][x].config(text="X")
+                    self.btn[y][x].config(image=self.X_image)
                 elif self.game.board[y][x] == 2:
-                    self.btn[y][x].config(text="O")
+                    self.btn[y][x].config(image=self.O_image)
                 else:
-                    self.btn[y][x].config(text="")
+                    self.btn[y][x].config(image=self.off_image)
 
         if self.game.state != 0:
             self.endingAction()
