@@ -104,6 +104,8 @@ class GameBoard:
         self.refresh()
 
     def endingAction(self):
+        if self.withTime:
+            self.root.after_cancel(self.timerHandler)
         if self.game.state == 1:
             messagebox.showinfo("Game Over", "Winner is X!")
         elif self.game.state == 2:
