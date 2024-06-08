@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 from game import *
 
-
 class GameBoard:
     def __init__(self, boardsize, withTime=False):
         self.root = tk.Tk()
@@ -24,20 +23,20 @@ class GameBoard:
         self.withTime = withTime
         self.digitsImages = [tk.PhotoImage(file=str(i) + ".png") for i in range(0, 10)]
 
-        self.digitHeight = 112
-        self.digitWidth = 80
-        span = 5
+        self.digitHeight = 64
+        self.digitWidth = 46
+        span = 2
 
         self.timerXDigit1 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
-        self.timerXDigit1.place(x=315, y=40, width=self.digitWidth, height=self.digitHeight)
+        self.timerXDigit1.place(x=315, y=35, width=self.digitWidth, height=self.digitHeight)
         self.timerXDigit0 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
-        self.timerXDigit0.place(x=315 + self.digitWidth + span, y=40, width=self.digitWidth, height=self.digitHeight)
+        self.timerXDigit0.place(x=315 + self.digitWidth + span, y=35, width=self.digitWidth, height=self.digitHeight)
 
         self.timerODigit1 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
-        self.timerODigit1.place(x=325 + 2 * (self.digitWidth + span), y=40, width=self.digitWidth,
+        self.timerODigit1.place(x=325 + 2 * (self.digitWidth + span), y=35, width=self.digitWidth,
                                 height=self.digitHeight)
         self.timerODigit0 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
-        self.timerODigit0.place(x=325 + 3 * (self.digitWidth + span), y=40, width=self.digitWidth,
+        self.timerODigit0.place(x=325 + 3 * (self.digitWidth + span), y=35, width=self.digitWidth,
                                 height=self.digitHeight)
 
         # Tworzenie przyciskow
