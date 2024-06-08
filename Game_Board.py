@@ -3,7 +3,7 @@ from tkinter import messagebox
 from game import *
 
 class GameBoard:
-    def __init__(self, boardsize):
+    def __init__(self, boardsize, withTime=False):
         self.root = tk.Tk()
         self.root.geometry("768x768")
         self.root.title( "Gra " + str(boardsize) + "x" + str(boardsize) )
@@ -14,6 +14,9 @@ class GameBoard:
         self.background_image = tk.PhotoImage(file="3x3-gotowe.png")
         self.background = tk.Label(self.root, image=self.background_image)
         self.background.place(x=0, y=0, relwidth=1, relheight=1)
+
+        self.withTime = withTime
+        print(self.withTime)
 
         # Tworzenie przyciskow
         self.off_image = tk.PhotoImage(file="Empty_temp.png")

@@ -50,4 +50,5 @@ class Choose:
         GameBoard(5)
 
     def run_time_game(self, board_size):
-        print("time game", board_size)
+        self.root.destroy()
+        GameBoard(board_size, True)
