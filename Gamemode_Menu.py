@@ -25,6 +25,16 @@ class Choose:
         self.btn_5x5 = tk.Button(self.root, image=self.image_5x5, borderwidth=0, command=self.run_5x5)
         self.btn_5x5.place(x=550, y=300, width=100, height=100)
 
+        # Wybór gry na czas
+        self.btn_time_3x3 = tk.Button(self.root, image=self.image_3x3, borderwidth=0, command=lambda: self.run_time_game(3))
+        self.btn_time_3x3.place(x=350, y=400, width=100, height=100)
+
+        self.btn_time_4x4= tk.Button(self.root, image=self.image_4x4, borderwidth=0, command=lambda: self.run_time_game(4))
+        self.btn_time_4x4.place(x=450, y=400, width=100, height=100)
+
+        self.btn_time_5x5 = tk.Button(self.root, image=self.image_5x5, borderwidth=0, command=lambda: self.run_time_game(5))
+        self.btn_time_5x5.place(x=550, y=400, width=100, height=100)
+
         self.root.mainloop()
 
     def run_3x3(self):
@@ -38,3 +48,6 @@ class Choose:
     def run_5x5(self):
         self.root.destroy()
         GameBoard(5)
+
+    def run_time_game(self, board_size):
+        print("time game", board_size)
