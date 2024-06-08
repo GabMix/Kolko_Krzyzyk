@@ -53,16 +53,14 @@ class GameBoard:
         # Odpowiedni rozmiar znaków
         self.X_image = tk.PhotoImage(file="X_" + str(boardsize) + ".png")
         self.O_image = tk.PhotoImage(file="O_" + str(boardsize) + ".png")
-
-        # Do cofania ruchu
-        self.last_move = (-1, -1)
-        self.reset_status = 0
-
-        self.btn_reset = tk.Button(self.root, text='reset', borderwidth=0, command=self.resetMove)
-        self.btn_reset.place(x=650, y=400, width=80, height=80)
         
         if self.withTime:
             self.timerHandler = self.root.after(1000, lambda: self.clock())
+        else:
+            self.last_move = (-1, -1)
+            self.reset_status = 0
+            self.btn_reset = tk.Button(self.root, text='reset', borderwidth=0, command=self.resetMove)
+            self.btn_reset.place(x=650, y=400, width=80, height=80)
 
         self.refresh()
         self.root.mainloop()
@@ -100,12 +98,14 @@ class GameBoard:
             self.endingAction()
 
     def clickTile(self, x, y):
-        self.last_move = (x, y)
-        self.reset_status = 0
-        self.btn_reset.config(text='reset')
         before = self.game.board[y][x]
         self.game.makeMove(x, y)
         after = self.game.board[y][x]
+
+        if self.withTime==False:
+            self.last_move = (x, y)
+            self.reset_status = 0
+            self.btn_reset.config(text='reset')
 
         if before != after and self.withTime:
             self.resetTime()
@@ -143,4 +143,3 @@ class GameBoard:
             self.game.switchPlayer()
             self.btn_reset.config(text='X')
             self.reset_status = 1
-            self.refreshTimer()
