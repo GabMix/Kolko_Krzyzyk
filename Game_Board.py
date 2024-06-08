@@ -139,7 +139,7 @@ class GameBoard:
     def resetMove(self):
         if self.last_move != (-1, -1) and self.reset_status == 0:
             self.game.board[self.last_move[1]][self.last_move[0]] = 0
-            self.btn[self.last_move[0]][self.last_move[1]].config(image=self.off_image)
+            self.btn[self.last_move[1]][self.last_move[0]].config(image=self.off_image)
             self.game.switchPlayer()
             self.btn_reset.config(text='X')
             self.reset_status = 1
