@@ -98,7 +98,7 @@ class GameBoard:
         self.game.makeMove(x, y)
         after = self.game.board[y][x]
 
-        if before != after:
+        if before != after and self.withTime:
             self.resetTime()
             self.root.after_cancel(self.timerHandler)
             self.timerHandler = self.root.after(1000, lambda: self.clock())
