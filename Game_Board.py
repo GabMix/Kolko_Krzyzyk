@@ -51,8 +51,17 @@ class GameBoard:
         self.X_image = tk.PhotoImage(file="X_"+str(boardsize)+".png")
         self.O_image = tk.PhotoImage(file="O_"+str(boardsize)+".png")
 
+
+        if self.withTime:
+            self.timerHandler = self.root.after(1000, lambda: self.clock())
+
         self.refresh()
         self.root.mainloop()
+
+    def clock(self):
+        print("Hello")
+        self.timerHandler = self.root.after(1000, lambda: self.clock())
+
 
     def refresh(self):
         for x in range(self.game.boardSize):
