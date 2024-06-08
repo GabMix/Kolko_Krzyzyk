@@ -65,9 +65,14 @@ class GameBoard:
         self.countDown()
         if self.timeX < 0 or self.timeO < 0:
             self.game.switchPlayer()
+            self.resetTime()
 
         self.refresh()
         self.timerHandler = self.root.after(1000, lambda: self.clock())
+
+    def resetTime(self):
+        self.timeX = self.timePerMove
+        self.timeO = self.timePerMove
 
     def countDown(self):
         if self.game.activePlayer == 1:
@@ -89,7 +94,13 @@ class GameBoard:
             self.endingAction()
 
     def clickTile(self, x, y):
+        before = self.game.board[y][x]
         self.game.makeMove(x, y)
+        after = self.game.board[y][x]
+
+        if before != after:
+            self.resetTime()
+
         self.refresh()
 
     def endingAction(self):
