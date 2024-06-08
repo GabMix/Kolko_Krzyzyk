@@ -100,6 +100,8 @@ class GameBoard:
 
         if before != after:
             self.resetTime()
+            self.root.after_cancel(self.timerHandler)
+            self.timerHandler = self.root.after(1000, lambda: self.clock())
 
         self.refresh()
 
