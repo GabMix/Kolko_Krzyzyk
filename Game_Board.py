@@ -5,13 +5,15 @@ from game import *
 class GameBoard:
     def __init__(self, boardsize, withTime=False):
         self.root = tk.Tk()
-        self.root.wm_attributes('-transparentcolor', self.root['bg'])
+        # self.root.wm_attributes('-transparentcolor', self.root['bg'])
         self.root.geometry("768x768")
         self.root.title( "Gra " + str(boardsize) + "x" + str(boardsize) )
         self.root.resizable(False, False)
         self.game = Game(boardsize)
 
         self.timePerMove = 5
+        self.timeX = self.timePerMove
+        self.timeO = self.timePerMove
 
         # Tlo
         self.background_image = tk.PhotoImage(file="3x3-gotowe.png")
@@ -19,21 +21,20 @@ class GameBoard:
         self.background.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.withTime = withTime
-        scale = 0.5
+        self.digitsImages = [tk.PhotoImage(file=str(i)+".png") for i in range(0,10)]
 
         self.digitHeight = 112
         self.digitWidth = 80
-        img = tk.PhotoImage(file="0.png")
         span = 5
 
-        self.timerXDigit1 = tk.Label(self.root, image=img)
+        self.timerXDigit1 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
         self.timerXDigit1.place(x=315, y=40, width=self.digitWidth, height=self.digitHeight)
-        self.timerXDigit0 = tk.Label(self.root, image=img)
+        self.timerXDigit0 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
         self.timerXDigit0.place(x=315+self.digitWidth+span, y=40, width=self.digitWidth, height=self.digitHeight)
 
-        self.timerODigit1 = tk.Label(self.root, image=img)
+        self.timerODigit1 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
         self.timerODigit1.place(x=325+2*(self.digitWidth+span), y=40, width=self.digitWidth, height=self.digitHeight)
-        self.timerODigit0 = tk.Label(self.root, image=img)
+        self.timerODigit0 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
         self.timerODigit0.place(x=325+3*(self.digitWidth+span), y=40, width=self.digitWidth, height=self.digitHeight)
 
         # Tworzenie przyciskow
@@ -62,7 +63,7 @@ class GameBoard:
                     self.btn[y][x].config(image=self.O_image)
                 else:
                     self.btn[y][x].config(image=self.off_image)
-
+        self.refreshTimer()
         if self.game.state != 0:
             self.endingAction()
 
@@ -80,3 +81,12 @@ class GameBoard:
         self.root.destroy()
         from Main_Menu import MainMenu
         MainMenu()
+
+    def refreshTimer(self):
+        if self.withTime == False:
+            return
+
+        self.timerXDigit0.config(image=self.digitsImages[self.timeX % 10])
+        self.timerXDigit1.config(image=self.digitsImages[int(self.timeX / 10)])
+        self.timerODigit0.config(image=self.digitsImages[self.timeO % 10])
+        self.timerODigit1.config(image=self.digitsImages[int(self.timeO / 10)])
