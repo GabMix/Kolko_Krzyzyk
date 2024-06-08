@@ -19,7 +19,7 @@ def load_stats(self):
     if os.path.exists("stats.json"):
         with open("stats.json", "r") as file:
             return json.load(file)
-    return {"Wins": {}, "Losses": {}, "Draws": 0}
+    return {"Wins": {"Player 1": 0, "Player 2": 0}, "Losses": {"Player 1": 0, "Player 2": 0}, "Draws": 0}
 
 
 def save_stats(self, stats):
