@@ -5,10 +5,13 @@ from game import *
 class GameBoard:
     def __init__(self, boardsize, withTime=False):
         self.root = tk.Tk()
+        self.root.wm_attributes('-transparentcolor', self.root['bg'])
         self.root.geometry("768x768")
         self.root.title( "Gra " + str(boardsize) + "x" + str(boardsize) )
         self.root.resizable(False, False)
         self.game = Game(boardsize)
+
+        self.timePerMove = 5
 
         # Tlo
         self.background_image = tk.PhotoImage(file="3x3-gotowe.png")
@@ -16,7 +19,22 @@ class GameBoard:
         self.background.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.withTime = withTime
-        print(self.withTime)
+        scale = 0.5
+
+        self.digitHeight = 112
+        self.digitWidth = 80
+        img = tk.PhotoImage(file="0.png")
+        span = 5
+
+        self.timerXDigit1 = tk.Label(self.root, image=img)
+        self.timerXDigit1.place(x=315, y=40, width=self.digitWidth, height=self.digitHeight)
+        self.timerXDigit0 = tk.Label(self.root, image=img)
+        self.timerXDigit0.place(x=315+self.digitWidth+span, y=40, width=self.digitWidth, height=self.digitHeight)
+
+        self.timerODigit1 = tk.Label(self.root, image=img)
+        self.timerODigit1.place(x=325+2*(self.digitWidth+span), y=40, width=self.digitWidth, height=self.digitHeight)
+        self.timerODigit0 = tk.Label(self.root, image=img)
+        self.timerODigit0.place(x=325+3*(self.digitWidth+span), y=40, width=self.digitWidth, height=self.digitHeight)
 
         # Tworzenie przyciskow
         self.off_image = tk.PhotoImage(file="Empty_temp.png")
