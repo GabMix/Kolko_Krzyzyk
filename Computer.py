@@ -56,3 +56,24 @@ class Computer:
             self.game.switchPlayer()
         else:
             self.game.endGame()
+
+    def hard_comp_move(self):
+        move = (0,0)
+        best_score = -2 # liczba mniejsz niz -1
+        for y in range(self.game.boardSize):
+            for x in range(self.game.boardSize):
+                if self.game.board[y][x] == 0:
+                    self.game.board[y][x] = self.game.activePlayer
+                score = self.minimax(0, True)
+                self.game.board[y][x] = 0
+                if score > best_score:
+                    best_score = score
+                move = (y, x)
+
+        self.game.checkIfGameOver()
+        if self.game.state == 0:
+            self.game.switchPlayer()
+        else:
+            self.game.endGame()
+
+        self.game.board[move[0]][move[1]] = self.game.activePlayer
