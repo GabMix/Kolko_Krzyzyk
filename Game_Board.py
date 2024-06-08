@@ -2,12 +2,13 @@ import tkinter as tk
 from tkinter import messagebox
 from game import *
 
+
 class GameBoard:
     def __init__(self, boardsize, withTime=False):
         self.root = tk.Tk()
         # self.root.wm_attributes('-transparentcolor', self.root['bg'])
         self.root.geometry("768x768")
-        self.root.title( "Gra " + str(boardsize) + "x" + str(boardsize) )
+        self.root.title("Gra " + str(boardsize) + "x" + str(boardsize))
         self.root.resizable(False, False)
         self.game = Game(boardsize)
 
@@ -21,7 +22,7 @@ class GameBoard:
         self.background.place(x=0, y=0, relwidth=1, relheight=1)
 
         self.withTime = withTime
-        self.digitsImages = [tk.PhotoImage(file=str(i)+".png") for i in range(0,10)]
+        self.digitsImages = [tk.PhotoImage(file=str(i) + ".png") for i in range(0, 10)]
 
         self.digitHeight = 112
         self.digitWidth = 80
@@ -30,12 +31,14 @@ class GameBoard:
         self.timerXDigit1 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
         self.timerXDigit1.place(x=315, y=40, width=self.digitWidth, height=self.digitHeight)
         self.timerXDigit0 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
-        self.timerXDigit0.place(x=315+self.digitWidth+span, y=40, width=self.digitWidth, height=self.digitHeight)
+        self.timerXDigit0.place(x=315 + self.digitWidth + span, y=40, width=self.digitWidth, height=self.digitHeight)
 
         self.timerODigit1 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
-        self.timerODigit1.place(x=325+2*(self.digitWidth+span), y=40, width=self.digitWidth, height=self.digitHeight)
+        self.timerODigit1.place(x=325 + 2 * (self.digitWidth + span), y=40, width=self.digitWidth,
+                                height=self.digitHeight)
         self.timerODigit0 = tk.Label(self.root, image=self.digitsImages[0], bg="black")
-        self.timerODigit0.place(x=325+3*(self.digitWidth+span), y=40, width=self.digitWidth, height=self.digitHeight)
+        self.timerODigit0.place(x=325 + 3 * (self.digitWidth + span), y=40, width=self.digitWidth,
+                                height=self.digitHeight)
 
         # Tworzenie przyciskow
         self.off_image = tk.PhotoImage(file="Empty_temp.png")
@@ -44,13 +47,13 @@ class GameBoard:
         # Przypisywanie przyciskow do siatki
         for x in range(boardsize):
             for y in range(boardsize):
-                self.btn[x][y].place(x=223 + (330/boardsize)*x, y=300 + (330/boardsize)*y, width=300/boardsize, height=300/boardsize)
-                self.btn[y][x].config(command=lambda x1=x,y1=y: self.clickTile(x1, y1))
+                self.btn[x][y].place(x=223 + (330 / boardsize) * x, y=300 + (330 / boardsize) * y,
+                                     width=300 / boardsize, height=300 / boardsize)
+                self.btn[y][x].config(command=lambda x1=x, y1=y: self.clickTile(x1, y1))
 
         # Odpowiedni rozmiar znaków
-        self.X_image = tk.PhotoImage(file="X_"+str(boardsize)+".png")
-        self.O_image = tk.PhotoImage(file="O_"+str(boardsize)+".png")
-
+        self.X_image = tk.PhotoImage(file="X_" + str(boardsize) + ".png")
+        self.O_image = tk.PhotoImage(file="O_" + str(boardsize) + ".png")
 
         if self.withTime:
             self.timerHandler = self.root.after(1000, lambda: self.clock())
@@ -59,9 +62,18 @@ class GameBoard:
         self.root.mainloop()
 
     def clock(self):
-        print("Hello")
+        self.countDown()
+        if self.timeX < 0 or self.timeO < 0:
+            self.game.switchPlayer()
+
+        self.refresh()
         self.timerHandler = self.root.after(1000, lambda: self.clock())
 
+    def countDown(self):
+        if self.game.activePlayer == 1:
+            self.timeX -= 1
+        elif self.game.activePlayer == 2:
+            self.timeO -= 1
 
     def refresh(self):
         for x in range(self.game.boardSize):
