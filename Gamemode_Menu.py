@@ -38,3 +38,7 @@ class Choose:
     def run_5x5(self):
         self.root.destroy()
         GameBoard(5)
+
+    def computer_gameplay(self):
+        self.root.destroy()
+        ComputerMenu()
