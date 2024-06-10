@@ -1,15 +1,21 @@
 import tkinter as tk
 from tkinter import messagebox
 from game import *
+from Computer import Computer
 
 class GameBoard:
-    def __init__(self, boardsize, withTime=False):
+    def __init__(self, boardsize, ai_player, withTime=False): # 0 -Łatwy, 1- Trydny, 2- Brak
         self.root = tk.Tk()
         # self.root.wm_attributes('-transparentcolor', self.root['bg'])
         self.root.geometry("768x768")
         self.root.title("Gra " + str(boardsize) + "x" + str(boardsize))
         self.root.resizable(False, False)
         self.game = Game(boardsize)
+
+        self.ai_player = ai_player
+        self.computer = None
+        if ai_player != 2:
+            self.computer = Computer(boardsize, self.game)
 
         self.timePerMove = 5
         self.timeX = self.timePerMove
@@ -53,7 +59,7 @@ class GameBoard:
         # Odpowiedni rozmiar znaków
         self.X_image = tk.PhotoImage(file="X_" + str(boardsize) + ".png")
         self.O_image = tk.PhotoImage(file="O_" + str(boardsize) + ".png")
-        
+
         if self.withTime:
             self.timerHandler = self.root.after(1000, lambda: self.clock())
         else:
@@ -100,6 +106,13 @@ class GameBoard:
     def clickTile(self, x, y):
         before = self.game.board[y][x]
         self.game.makeMove(x, y)
+        self.refresh()
+        if self.game.state == 0 and self.ai_player in (0, 1):
+            if self.ai_player == 0:
+                self.computer.easy_comp_move()
+            elif self.ai_player == 1:
+                self.computer.hard_comp_move()
+            self.refresh()
         after = self.game.board[y][x]
 
         if self.withTime==False:
