@@ -1,4 +1,5 @@
 from Game_Board import *
+from ComputerMenu import *
 
 class Choose:
     def __init__(self):
@@ -25,6 +26,11 @@ class Choose:
         self.btn_5x5 = tk.Button(self.root, image=self.image_5x5, borderwidth=0, command=self.run_5x5)
         self.btn_5x5.place(x=550, y=300, width=100, height=100)
 
+        self.Computer_gameplay = tk.PhotoImage(file="")
+        self.Computer_gameplay = tk.Button(self.root, image=self.Computer_gameplay, borderwidth=0, command=self.computer_gameplay)
+        self.Computer_gameplay.place(x=350, y=400, width=100, height=100)
+
+        
         self.root.mainloop()
 
     def run_3x3(self):
