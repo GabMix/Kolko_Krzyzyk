@@ -1,79 +1,85 @@
 from random import randrange
-
-from game import *
+from game import Game
+from copy import deepcopy
 
 class Computer:
-    def __init__(self, BoardSize, difficulty_lvl): # 0 - poczatkujacy, 1 - zaawansowany
-        self.difficulty = difficulty_lvl
-        self.game = Game(BoardSize)
+    def __init__(self, BoardSize, gameObj: Game): # 0 - easy, 1 - hard
+        self.game = gameObj
 
-    def easy_comp_move(self): #Ruch komputera w trybie początkującym
-        #self.game.makeMove(randrange(self.game.boardSize), randrange(self.game.boardSize))
-        if self.game.board[randrange(self.game.boardSize)][randrange(self.game.boardSize)] != 0:
-            self.game.board[randrange(self.game.boardSize)][randrange(self.game.boardSize)] = self.game.activePlayer
-
+    def easy_comp_move(self):
+        while True:
+            x, y = randrange(self.game.boardSize), randrange(self.game.boardSize)
+            if self.game.board[y][x] == 0:
+                self.game.board[y][x] = 2 #self.game.activePlayer
+                break
         self.game.checkIfGameOver()
         if self.game.state == 0:
             self.game.switchPlayer()
         else:
             self.game.endGame()
-    
-    def minimax(self, depth, computer_turn : bool):
-        self.game.checkIfGameOver()
-        if self.game.state == -1:
-            return 0
-        elif self.game.state == 1:
-            return 1
-        elif self.game.state == 2:
+
+
+    def minimax(self, depth, is_maximizing, board):
+        original_state = self.game.state
+        #self.game.checkIfGameOver()
+        if self.game.state == 1:
+            self.game.state = original_state
             return -1
+        elif self.game.state == 2:
+            self.game.state = original_state
+            return 1
+        elif self.game.state == -1:
+            self.game.state = original_state
+            return 0
 
-        if computer_turn == 1: #Sprawdzanie maksymalnego wyniku dla komputera
-            best_score = -2
-            for y in range(self.game.boardSize):
-                for x in range(self.game.boardSize):
-                    if self.game.board[y][x] == 0:
-                        self.game.board[y][x] = self.game.activePlayer
-                    score = self.minimax( depth + 1, False)
-                    self.game.board[y][x] = 0
-                    best_score = max(score, best_score)
+
+        if is_maximizing:
+            best_score = -100
+            new_board = deepcopy(board)  # Deep copy the board
+            for y in range(2):
+                for x in range(2):
+                    if board[y][x] == 0:
+                    #    self.game.board[y][x] = 2
+                    #    score = self.minimax(depth + 1, False)
+                    #    self.game.board[y][x] = 0
+                        new_board[y][x] = 2  # Place move on copy
+                        score = self.minimax(depth + 1, False, new_board)
+                        new_board[y][x] = 0
+                        best_score = max(score, best_score)
             return best_score
-
-        elif computer_turn == 1: #Sprawdzanie minimalneg wyniku dla gracza
-            best_score = -2
-            for y in range(self.game.boardSize):
-                for x in range(self.game.boardSize):
-                    if self.game.board[y][x] == 0:
-                        self.game.switchPlayer()
-                        self.game.board[y][x] = self.game.activePlayer
-                        self.game.switchPlayer()
-                    score = self.minimax( depth + 1, True)
-                    self.game.board[y][x] = 0
-                    best_score = min(score, best_score)
-            return best_score
-
-        self.game.checkIfGameOver()
-        if self.game.state == 0:
-            self.game.switchPlayer()
         else:
-            self.game.endGame()
+            best_score = 100
+            new_board = deepcopy(board)  # Deep copy the board
+            for y in range(2):
+                for x in range(2):
+                    if board[y][x] == 0:
+                        #self.game.board[y][x] = 1
+                        #score = self.minimax(depth + 1, True)
+                        #self.game.board[y][x] = 0
+                        new_board[y][x] = 1  # Place move on copy
+                        score = self.minimax(depth + 1, True, new_board)
+                        new_board[y][x] = 0
+                        best_score = min(score, best_score)
+            return best_score
 
     def hard_comp_move(self):
-        move = (0,0)
-        best_score = -2 # liczba mniejsz niz -1
+        print("Hard AI making a move...")
+        best_score = -100
+        best_move = None
         for y in range(self.game.boardSize):
             for x in range(self.game.boardSize):
                 if self.game.board[y][x] == 0:
-                    self.game.board[y][x] = self.game.activePlayer
-                score = self.minimax(0, True)
-                self.game.board[y][x] = 0
-                if score > best_score:
-                    best_score = score
-                move = (y, x)
-
+                    self.game.board[y][x] = 2 #self.game.activePlayer
+                    score = self.minimax(0, False, self.game.board)
+                    self.game.board[y][x] = 0
+                    if score > best_score:
+                        best_score = score
+                        best_move = (x, y)
+        if best_move:
+            self.game.makeMove(best_move[0], best_move[1])
+            print(f"Hard AI chose position: {best_move}")
         self.game.checkIfGameOver()
-        if self.game.state == 0:
-            self.game.switchPlayer()
-        else:
-            self.game.endGame()
-
-        self.game.board[move[0]][move[1]] = self.game.activePlayer
+        #if self.game.state == 0:
+        #    self.game.switchPlayer()
+        #else:
+        #    self.game.endGame()
