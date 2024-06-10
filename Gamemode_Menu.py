@@ -49,19 +49,19 @@ class Choose:
 
     def run_3x3(self):
         self.root.destroy()
-        GameBoard(3, 0)
+        GameBoard(3, 2)
 
     def run_4x4(self):
         self.root.destroy()
-        GameBoard(4, 0)
+        GameBoard(4, 2)
 
     def run_5x5(self):
         self.root.destroy()
-        GameBoard(5, 0)
+        GameBoard(5, 2)
 
     def run_time_game(self, board_size):
         self.root.destroy()
-        GameBoard(board_size, 0,True)
+        GameBoard(board_size, 2,True)
 
     def computer_gameplay(self):
         self.root.destroy()
