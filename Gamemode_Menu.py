@@ -1,4 +1,5 @@
 from Game_Board import *
+from ComputerMenu import ComputerMenu
 
 class Choose:
     def __init__(self):
@@ -25,6 +26,8 @@ class Choose:
         self.btn_5x5 = tk.Button(self.root, image=self.image_5x5, borderwidth=0, command=self.run_5x5)
         self.btn_5x5.place(x=550, y=300, width=100, height=100)
 
+
+
         # Wybór gry na czas
         self.btn_time_3x3 = tk.Button(self.root, image=self.image_3x3, borderwidth=0, command=lambda: self.run_time_game(3))
         self.btn_time_3x3.place(x=350, y=400, width=100, height=100)
@@ -35,20 +38,31 @@ class Choose:
         self.btn_time_5x5 = tk.Button(self.root, image=self.image_5x5, borderwidth=0, command=lambda: self.run_time_game(5))
         self.btn_time_5x5.place(x=550, y=400, width=100, height=100)
 
+        # Wybór komputera
+        self.image_PVE = tk.PhotoImage(file="IMG_20240609_021247.png")
+
+        self.btn_PVE = tk.Button(self.root, image=self.image_PVE, borderwidth=0, command=lambda: self.computer_gameplay())
+        self.btn_PVE.place(x=450, y=500, width=100, height=100)
+
         self.root.mainloop()
+
 
     def run_3x3(self):
         self.root.destroy()
-        GameBoard(3)
+        GameBoard(3, 0)
 
     def run_4x4(self):
         self.root.destroy()
-        GameBoard(4)
+        GameBoard(4, 0)
 
     def run_5x5(self):
         self.root.destroy()
-        GameBoard(5)
+        GameBoard(5, 0)
 
     def run_time_game(self, board_size):
         self.root.destroy()
-        GameBoard(board_size, True)
+        GameBoard(board_size, 0,True)
+
+    def computer_gameplay(self):
+        self.root.destroy()
+        ComputerMenu()
