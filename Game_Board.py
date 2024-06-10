@@ -62,7 +62,7 @@ class GameBoard:
 
         if self.withTime:
             self.timerHandler = self.root.after(1000, lambda: self.clock())
-        else:
+        elif self.ai_player == 2:
             self.last_move = (-1, -1)
             self.reset_status = 0
             self.btn_reset = tk.Button(self.root, text='reset', borderwidth=0, command=self.resetMove)
@@ -115,7 +115,7 @@ class GameBoard:
             self.refresh()
         after = self.game.board[y][x]
 
-        if self.withTime==False:
+        if self.withTime==False and self.ai_player==2:
             self.last_move = (x, y)
             self.reset_status = 0
             self.btn_reset.config(text='reset')
