@@ -1,8 +1,8 @@
 import tkinter as tk
 import json
 import os
-    def run_statystyki(self):
-        self.show_stats()
+    # def run_statystyki(self):
+    #     self.show_stats()
 
     def load_stats(self):
         if os.path.exists("stats.json"):
