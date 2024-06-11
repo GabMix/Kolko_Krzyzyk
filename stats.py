@@ -31,7 +31,7 @@ def show_stats(self):
     draws_label = tk.Label(stats_window, text=f"Remisy: {stats['Draws']}")
     draws_label.pack()
 
-    back_button = tk.Button(stats_window, text="Powrót do menu", command=stats_window.destroy)
+    back_button = tk.Button(stats_window, text="Powrót do menu", command=self.back_to_main_menu)
     back_button.pack()
 
 def update_stats(self, result):
@@ -44,7 +44,13 @@ def update_stats(self, result):
         stats["Wins"][winner] += 1
         stats["Losses"][loser] += 1
     self.save_stats(stats)
+
+def back_to_main_menu(self):
+    self.root.destroy()
+    self.__init__()
+
 if __name__ == "__main__":
     main_menu = MainMenu()
+
 
 
