@@ -7,7 +7,7 @@ from stats import Stats
 class GameBoard:
     def __init__(self, boardsize, ai_player, withTime=False): # 0 -Łatwy, 1- Trydny, 2- Brak
         self.root = tk.Tk()
-        self.stats = Stats(self.root)
+        #self.stats = Stats(self.root)
         # self.root.wm_attributes('-transparentcolor', self.root['bg'])
         self.root.geometry("768x768")
         self.root.title("Gra " + str(boardsize) + "x" + str(boardsize))
@@ -132,14 +132,14 @@ class GameBoard:
     def endingAction(self):
         if self.withTime:
             self.root.after_cancel(self.timerHandler)
-        self.stats.update_stats(self.game.state)
+        #self.stats.update_stats(self.game.state)
         if self.game.state == 1:
             messagebox.showinfo("Game Over", "Winner is X!")
         elif self.game.state == 2:
             messagebox.showinfo("Game Over", "Winner is O!")
         else:
             messagebox.showinfo("Game Over", "Tie")
-        stats = Stats()
+        stats = Stats(self.root)
         stats.update_stats(self.game.state)
 
         self.root.destroy()

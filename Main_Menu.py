@@ -21,11 +21,11 @@ class Stats:
         stats_window.title("Statystyki")
 
         wins_label = tk.Label(stats_window,
-                              text=f"Wygrane:\nGracz 1: {stats['Wins']['Player 1']}\nGracz 2: {stats['Wins']['Player 2']}")
+                              text=f"Wygrane:\nGracz 1: {stats['Wins']['Gracz 1']}\nGracz 2: {stats['Wins']['Gracz 2']}")
         wins_label.pack()
 
         losses_label = tk.Label(stats_window,
-                                text=f"Przegrane:\nGracz 1: {stats['Losses']['Player 1']}\nGracz 2: {stats['Losses']['Player 2']}")
+                                text=f"Przegrane:\nGracz 1: {stats['Losses']['Gracz 1']}\nGracz 2: {stats['Losses']['Gracz 2']}")
         losses_label.pack()
 
         draws_label = tk.Label(stats_window, text=f"Remisy: {stats['Draws']}")
@@ -39,8 +39,8 @@ class Stats:
         if result == -1:
             stats["Draws"] += 1
         else:
-            winner = "Player 1" if result == 1 else "Player 2"
-            loser = "Player 2" if result == 1 else "Player 1"
+            winner = "Gracz 1" if result == 1 else "Gracz 2"
+            loser = "Gracz 2" if result == 1 else "Gracz 1"
             stats["Wins"][winner] += 1
             stats["Losses"][loser] += 1
         self.save_stats(stats)
