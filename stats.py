@@ -8,7 +8,7 @@ def load_stats(self):
     if os.path.exists("stats.json"):
         with open("stats.json", "r") as file:
             return json.load(file)
-    return {"Wins": {"Gracz 1": 0, "Gracz 2": 0}, "Losses": {"Gracz 1": 0, "Gracz 2": 0}, "Draws": 0}
+    return {"Wins": {"Player 1": 0, "Player 2": 0}, "Losses": {"Player 1": 0, "Player 2": 0}, "Draws": 0}
 
 def save_stats(self, stats):
     with open("stats.json", "w") as file:
@@ -31,7 +31,7 @@ def show_stats(self):
     draws_label = tk.Label(stats_window, text=f"Remisy: {stats['Draws']}")
     draws_label.pack()
 
-    back_button = tk.Button(stats_window, text="Powrót do menu", command=self.back_to_main_menu)
+    back_button = tk.Button(stats_window, text="Powrót do menu", command=stats_window.destroy)
     back_button.pack()
 
 def update_stats(self, result):
@@ -44,5 +44,7 @@ def update_stats(self, result):
         stats["Wins"][winner] += 1
         stats["Losses"][loser] += 1
     self.save_stats(stats)
+if __name__ == "__main__":
+    main_menu = MainMenu()
 
 
