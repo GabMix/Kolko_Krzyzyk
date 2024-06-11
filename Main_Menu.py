@@ -86,4 +86,15 @@ class MainMenu:
         stats.show_stats(self.root)
 
     def run_tworcy(self):
-        print("ERROR: Twórcy nie gotowe")
+       # print("ERROR: Twórcy nie gotowe")
+        creators_window = tk.Toplevel(self.root)
+        creators_window.title("Twórcy")
+        creators_window.geometry("400x300")
+        creators_window.configure(relief="flat")
+
+        bigger_font = ("Helvetica", 12)
+
+        creators_label = tk.Label(creators_window,
+                                  text="Gaba Mikstein\nSebastian Mleko\nKrzysztof Mazurkiewicz\nPiotr Mlak\nDagmara Krenich",
+                                  bg="white", font=bigger_font)
+        creators_label.pack(fill="both", expand=True)
